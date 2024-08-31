@@ -5,5 +5,5 @@ repo = UserRepository()
 
 service = UserService(repository=repo)
 
-async def service_return():
+async def service_return() -> UserService:
     return service

@@ -1,5 +1,9 @@
+from typing import List
+
 from pydantic import BaseModel
 
 class Task(BaseModel):
-    id: int
     text: str
+
+class TaskList(BaseModel):
+    tasks: List[Task]

@@ -1,7 +1,7 @@
 from typing import List
 
-from sqlalchemy import Table, MetaData, String, ForeignKey, Integer
-from sqlalchemy.orm import mapped_column, declarative_base, DeclarativeBase, Mapped, relationship
+from sqlalchemy import Table, MetaData, String, ForeignKey, Integer, Column, ARRAY
+from sqlalchemy.orm import mapped_column, declarative_base, DeclarativeBase, Mapped, relationship, Relationship
 
 
 class Base(DeclarativeBase):
@@ -13,13 +13,13 @@ Base.metadata = metadata
 
 class User(Base):
     __tablename__ = "user"
-    username: Mapped[str] = mapped_column(String,primary_key=True)
-    questions: Mapped[List] = mapped_column(ForeignKey("tasks.id"),nullable=True)
+    username=Column("username",String,primary_key=True)
+    password=Column("password",String)
 
 class Tasks(Base):
     __tablename__ = "tasks"
-    id: Mapped[int] = mapped_column(Integer,primary_key=True)
-    text: Mapped[str] = mapped_column(String,nullable=False)
-
+    id=Column("id",Integer,primary_key=True)
+    text=Column("text",String,nullable=False)
+    user_id=Column("fk",String,ForeignKey("user.username"))
 
 

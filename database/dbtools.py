@@ -10,7 +10,7 @@ async def drop_table():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
 
-sessionmaker = async_sessionmaker(engine)
+sessionmaker = async_sessionmaker(engine,autoflush=True,expire_on_commit=False)
 
 async def sess_generator() -> AsyncSession:
     async with sessionmaker() as sess:
